@@ -39,18 +39,19 @@ const playRound = (playerSelection, computerSelection) => {
 
  const game = () => {
     for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt('Choose what to throw','rock, paper, or scissors?').toLowerCase()
         const computerSelection = getComputerChoice()
-        playRound(playerSelection, computerSelection)
+        console.log(playRound(playerSelection, computerSelection))
     }
 
     if (playerScore > compScore) {
-        return 'You beat AI! You genius!'
+        return 'You beat AI! You are a genius!'
     } else if (playerScore < compScore) {
         return 'You got beat by AI! Get better!'
     } else {
-        return 'You tied with the computer, not bad I guess...'
+        return 'You tied with the computer, not bad....I guess'
     }
  }
  console.log(game())
 
- game()
+ 
