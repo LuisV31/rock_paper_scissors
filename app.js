@@ -4,17 +4,15 @@ let compScore = 0
 const getComputerChoice = () => {
     const arrOfChoices = ['rock', 'paper', 'scissors']
     const randomNum = Math.floor(Math.random() * 3)
+    //above could be better coded as... (Math.random() * arrOfChoices.length)
     const comChoice = arrOfChoices[randomNum]
     return comChoice
+    //above could be better coded as... return arrOfChoices[randomNum]
 }
 
 const playRound = (playerSelection, computerSelection) => {
-    if (playerSelection === 'rock' && computerSelection === 'rock') {
-        return 'You both picked rock, try again'
-    } else if (playerSelection === 'paper' && computerSelection === 'paper') {
-        return 'You both picked paper, try again'
-    } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
-        return 'You both picked scissors, try again'
+    if (playerSelection === computerSelection) {
+        return `You both picked ${playerSelection}, try again`
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
         compScore++
         return 'You lost! Paper covers rock!'
@@ -35,7 +33,8 @@ const playRound = (playerSelection, computerSelection) => {
         return 'You win! Scissors cut paper!'
     }
 }
- const playerSelection = 'rock'
+
+ 
 
  const game = () => {
     for (let i = 0; i < 5; i++) {
@@ -52,6 +51,7 @@ const playRound = (playerSelection, computerSelection) => {
         return 'You tied with the computer, not bad....I guess'
     }
  }
+ 
  console.log(game())
 
  
