@@ -3,11 +3,8 @@ let compScore = 0
 
 const getComputerChoice = () => {
     const arrOfChoices = ['rock', 'paper', 'scissors']
-    const randomNum = Math.floor(Math.random() * 3)
-    //above could be better coded as... (Math.random() * arrOfChoices.length)
-    const comChoice = arrOfChoices[randomNum]
-    return comChoice
-    //above could be better coded as... return arrOfChoices[randomNum]
+    const randomNum = Math.floor(Math.random() * arrOfChoices.length)
+    return arrOfChoices[randomNum]
 }
 
 const playRound = (playerSelection, computerSelection) => {
