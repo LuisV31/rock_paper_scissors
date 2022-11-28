@@ -48,7 +48,7 @@ const checkForWinner = (playerScore, computerScore) => {
     const h2 = document.createElement('h2')
     if (playerScore === 5) {
         h2.classList.add('player-won')
-        h2.innerText = `You won ${playerScore} to ${computerScore} great job beating the computer!`
+        h2.innerText = `You won! Great job beating the computer!`
         if (outcomeDiv.hasChildNodes()) {
             outcomeDiv.removeChild(outcomeDiv.children[0]);
         }
@@ -58,7 +58,7 @@ const checkForWinner = (playerScore, computerScore) => {
 
     if (computerScore === 5) {
         h2.classList.add('computer-won')
-        h2.innerText = `You lost ${playerScore} to ${computerScore} great job beating the computer!`
+        h2.innerText = `You lost bud, you'll get em next time...`
         if (outcomeDiv.hasChildNodes()) {
             outcomeDiv.removeChild(outcomeDiv.children[0]);
         }
@@ -72,12 +72,19 @@ const updateScores = (playerScore, computerScore) => {
     computerScoreDiv.innerText = `${computerScore}`
 }
 
+const updatePic = (playerSelection, computerSelection) => {
+    document.getElementById('playerChoicePic').src= `./images/${playerSelection}.svg`;
+    document.getElementById('compChoicePic').src= `./images/${computerSelection}.svg`;
+    compChoicePic.style.transform = 'rotateY(180deg)';
+}
+
 rockButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice()
     const playerSelection = 'rock'
     playRound(playerSelection, computerSelection)
     updateScores(playerScore, compScore)
     checkForWinner(playerScore, compScore)
+    updatePic(playerSelection, computerSelection)
 })
 
 paperButton.addEventListener('click', () => {
@@ -86,6 +93,7 @@ paperButton.addEventListener('click', () => {
     playRound(playerSelection, computerSelection)
     updateScores(playerScore, compScore)
     checkForWinner(playerScore, compScore)
+    updatePic(playerSelection, computerSelection)
 })
 
 scissorsButton.addEventListener('click', () => {
@@ -94,4 +102,5 @@ scissorsButton.addEventListener('click', () => {
     playRound(playerSelection, computerSelection)
     updateScores(playerScore, compScore)
     checkForWinner(playerScore, compScore)
+    updatePic(playerSelection, computerSelection)
 })
