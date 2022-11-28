@@ -6,6 +6,7 @@ const scissorsButton = document.querySelector('.scissors')
 const outcomeDiv = document.querySelector('.outcome')
 const playerScoreDiv = document.querySelector('.player-score')
 const computerScoreDiv = document.querySelector('.computer-score')
+const buttonsDiv = document.querySelector('.button')
 
 const getComputerChoice = () => {
     const arrOfChoices = ['rock', 'paper', 'scissors']
@@ -52,6 +53,7 @@ const checkForWinner = (playerScore, computerScore) => {
             outcomeDiv.removeChild(outcomeDiv.children[0]);
         }
         outcomeDiv.append(h2)
+        buttonsDiv.remove();
     }
 
     if (computerScore === 5) {
@@ -61,6 +63,7 @@ const checkForWinner = (playerScore, computerScore) => {
             outcomeDiv.removeChild(outcomeDiv.children[0]);
         }
         outcomeDiv.append(h2)
+        buttonsDiv.remove();
     }
 }
 
