@@ -1,0 +1,23 @@
+.container {
+    width: 550px;
+    margin: auto;
+    text-align: center;
+}
+.running-score {
+    display: flex;
+    justify-content: space-between;
+}
+.match {
+    display: flex;
+}
+.button {
+    display: flex;
+    justify-content: space-between;
+}
+.player-score, .computer-score {
+    border: 2px solid black;
+    height: 30px;
+    width: 40px;
+    font-size: 25px;
+    padding: 20px;
+}

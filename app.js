@@ -4,8 +4,8 @@ const rockButton = document.querySelector('.rock')
 const paperButton = document.querySelector('.paper')
 const scissorsButton = document.querySelector('.scissors')
 const outcomeDiv = document.querySelector('.outcome')
-const playerScoreSpan = document.querySelector('.player-score')
-const computerScoreSpan = document.querySelector('.computer-score')
+const playerScoreDiv = document.querySelector('.player-score')
+const computerScoreDiv = document.querySelector('.computer-score')
 
 const getComputerChoice = () => {
     const arrOfChoices = ['rock', 'paper', 'scissors']
@@ -36,6 +36,10 @@ const playRound = (playerSelection, computerSelection) => {
         playerScore++
         p.innerText = 'You win! Scissors cut paper!'
     }
+
+    if(outcomeDiv.hasChildNodes()) {
+        outcomeDiv.removeChild(outcomeDiv.children[0]);
+    }
     outcomeDiv.appendChild(p)
 }
 
@@ -44,18 +48,25 @@ const checkForWinner = (playerScore, computerScore) => {
     if (playerScore === 5) {
         h2.classList.add('player-won')
         h2.innerText = `You won ${playerScore} to ${computerScore} great job beating the computer!`
+        if (outcomeDiv.hasChildNodes()) {
+            outcomeDiv.removeChild(outcomeDiv.children[0]);
+        }
+        outcomeDiv.append(h2)
     }
 
     if (computerScore === 5) {
         h2.classList.add('computer-won')
         h2.innerText = `You lost ${playerScore} to ${computerScore} great job beating the computer!`
+        if (outcomeDiv.hasChildNodes()) {
+            outcomeDiv.removeChild(outcomeDiv.children[0]);
+        }
+        outcomeDiv.append(h2)
     }
-    outcomeDiv.append(h2)
 }
 
 const updateScores = (playerScore, computerScore) => {
-    playerScoreSpan.innerText = `Player Score: ${playerScore}`
-    computerScoreSpan.innerText = `Computer Score: ${computerScore}`
+    playerScoreDiv.innerText = `${playerScore}`
+    computerScoreDiv.innerText = `${computerScore}`
 }
 
 rockButton.addEventListener('click', () => {
