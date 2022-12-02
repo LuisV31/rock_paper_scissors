@@ -1,8 +1,11 @@
+body {
+    background-color: #a2b9bc;
+}
 .container {
     width: 550px;
     margin: auto;
     text-align: center;
-    background-color: white;
+    background-color: #a2b9bc;
 }
 .running-score {
     display: flex;
@@ -32,12 +35,24 @@ button {
     width:90px;
     background-color: white;
     transition-duration:0.4s;
+    font-size: 20px;
 }
 button:hover {
     background-color: black;
     color: white;
+    cursor: pointer;
 }
 button:active {
+    box-shadow: 0 5px rgb(91, 91, 91);
+    transform: translateY(4px);
+}
+.re-button {
+    width:110px;
+    height:60px;
+    transition-duration: 0.4s;
+    font-size: 20px;
+}
+.re-button:active {
     box-shadow: 0 5px rgb(91, 91, 91);
     transform: translateY(4px);
 }
@@ -62,8 +77,11 @@ img {
 .outcome {
     padding: 8px;
     margin: 10px;
-    font-size: 17px;
+    font-size: 20px;
     font-weight: bold;
     height: 90px;
     width: 530px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

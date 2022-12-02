@@ -7,6 +7,8 @@ const outcomeDiv = document.querySelector('.outcome')
 const playerScoreDiv = document.querySelector('.player-score')
 const computerScoreDiv = document.querySelector('.computer-score')
 const buttonsDiv = document.querySelector('.button')
+const resetButton = document.querySelector('.reset-button')
+const containerDiv = document.querySelector('.container')
 
 const getComputerChoice = () => {
     const arrOfChoices = ['rock', 'paper', 'scissors']
@@ -46,24 +48,34 @@ const playRound = (playerSelection, computerSelection) => {
 
 const checkForWinner = (playerScore, computerScore) => {
     const h2 = document.createElement('h2')
+    const resetBtn = document.createElement('button')
     if (playerScore === 5) {
         h2.classList.add('player-won')
-        h2.innerText = `You won! Great job beating the computer!`
+        //clears p element and appends h2 to outcomeDiv
+        h2.innerText = `You won! Great job beating a computer!`
         if (outcomeDiv.hasChildNodes()) {
             outcomeDiv.removeChild(outcomeDiv.children[0]);
         }
         outcomeDiv.append(h2)
+        //removes buttons after game has ended and creates a "start new game" button
         buttonsDiv.remove();
+        resetButton.append(resetBtn)
+        resetBtn.innerText = 'Start New Game';
+        resetBtn.classList.add('re-button')
     }
 
     if (computerScore === 5) {
         h2.classList.add('computer-won')
-        h2.innerText = `You lost bud, you'll get em next time...`
+        h2.innerText = `You're done bud...a computer beat ya!`
         if (outcomeDiv.hasChildNodes()) {
             outcomeDiv.removeChild(outcomeDiv.children[0]);
         }
         outcomeDiv.append(h2)
+        
         buttonsDiv.remove();
+        resetButton.append(resetBtn)
+        resetBtn.innerText = 'Try Again?';
+        resetBtn.classList.add('re-button')
     }
 }
 
@@ -83,8 +95,8 @@ rockButton.addEventListener('click', () => {
     const playerSelection = 'rock'
     playRound(playerSelection, computerSelection)
     updateScores(playerScore, compScore)
-    checkForWinner(playerScore, compScore)
     updatePic(playerSelection, computerSelection)
+    checkForWinner(playerScore, compScore)
 })
 
 paperButton.addEventListener('click', () => {
@@ -92,8 +104,8 @@ paperButton.addEventListener('click', () => {
     const playerSelection = 'paper'
     playRound(playerSelection, computerSelection)
     updateScores(playerScore, compScore)
-    checkForWinner(playerScore, compScore)
     updatePic(playerSelection, computerSelection)
+    checkForWinner(playerScore, compScore)
 })
 
 scissorsButton.addEventListener('click', () => {
@@ -101,6 +113,24 @@ scissorsButton.addEventListener('click', () => {
     const playerSelection = 'scissors'
     playRound(playerSelection, computerSelection)
     updateScores(playerScore, compScore)
-    checkForWinner(playerScore, compScore)
     updatePic(playerSelection, computerSelection)
+    checkForWinner(playerScore, compScore)
+})
+
+resetButton.addEventListener('click', () => {
+     playerScore = 0
+     compScore = 0
+     updateScores(playerScore, compScore)
+    //resets scores and updates display
+     if (outcomeDiv.hasChildNodes()) {
+        outcomeDiv.removeChild(outcomeDiv.children[0]);
+    }
+    //removes start new game button and appends buttonsDiv back
+    if (resetButton.hasChildNodes()) {
+        resetButton.removeChild(resetButton.children[0]);
+    }
+    containerDiv.appendChild(buttonsDiv)
+    //resets pictures choice back to default black screen
+    document.getElementById('playerChoicePic').src= './images/darkSquare.jpg';
+    document.getElementById('compChoicePic').src= './images/darkSquare.jpg';
 })
