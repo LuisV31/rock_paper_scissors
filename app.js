@@ -10,118 +10,115 @@ const playerScoreDiv = document.querySelector('.player-score')
 const computerScoreDiv = document.querySelector('.computer-score')
 const buttonsDiv = document.querySelector('.button')
 const resetButton = document.querySelector('.reset-button')
-const containerDiv = document.querySelector('.container')
+// const containerDiv = document.querySelector('.container')
 
 // Function to get the computer's choice
 const getComputerChoice = () => {
-    const arrOfChoices = ['rock', 'paper', 'scissors']
-    const randomNum = Math.floor(Math.random() * arrOfChoices.length)
-    return arrOfChoices[randomNum];
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
 };
 
+// Function to display outcome messages
+const displayOutcomeMessage = (message) => {
+    // Clear the outcomeDiv by seeting its inner HTML to an empty string
+    outcomeDiv.innerHTML = '';
+
+    // Create a new <p> for the message
+    const messageElement = document.createElement('p');
+    messageElement.innerText = message;
+
+    // Append the new message element to the outcomeDiv
+    outcomeDiv.appendChild(messageElement);
+};
+
+// Function to create unique messages for winner or loser
+const getWinMessage = (winner, loser) => {
+    if (winner === 'rock' && loser === 'scissors') {
+        return 'Rock smashes scissors';
+    } else if (winner === 'scissors' && loser === 'paper') {
+        return 'Scissors cut paper';
+    } else if (winner === 'paper' && loser === 'rock') {
+        return 'Paper covers rock';
+    }
+};
+
+// Function to play a single round
 const playRound = (playerSelection, computerSelection) => {
-    const p = document.createElement('p')
+    let outcome;
+
     if (playerSelection === computerSelection) {
-        p.innerText = `You tied! You both picked ${playerSelection}`
-    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        compScore++
-        p.innerText = 'You lost! Paper covers rock!'
-    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        playerScore++
-        p.innerText = 'You win! Rock smashes scissors'
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        playerScore++
-        p.innerText = 'You win! Paper covers rock'
-    } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        compScore++
-        p.innerText = 'You lost! Scissors cuts paper!'
-    } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        compScore++
-        p.innerText = 'You lost! Rock smash scissors'
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        playerScore++
-        p.innerText = 'You win! Scissors cut paper!'
+        outcome = `It's a tie! Both chose ${playerSelection}.`;
+    } else if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
+        playerScore++;
+        outcome = `You win! ${getWinMessage(playerSelection, computerSelection)}.`;
+    } else {
+        compScore++;
+        outcome = `You lose! ${getWinMessage(computerSelection, playerSelection)}.`;
     }
 
-    if(outcomeDiv.hasChildNodes()) {
-        outcomeDiv.removeChild(outcomeDiv.children[0]);
-    }
-    outcomeDiv.appendChild(p)
-}
+    displayOutcomeMessage(outcome);
+    updateScores();
+};
 
-const checkForWinner = (playerScore, computerScore) => {
-    const h2 = document.createElement('h2')
-    const resetBtn = document.createElement('button')
+const checkForWinner = () => {
+    if (playerScore < 5 && compScore < 5) return;
+
+    let winnerMessage, buttonText;
     if (playerScore === 5) {
-        h2.classList.add('player-won')
-        //clears p element and appends h2 to outcomeDiv
-        h2.innerText = `You won! Great job beating a computer!`
-        if (outcomeDiv.hasChildNodes()) {
-            outcomeDiv.removeChild(outcomeDiv.children[0]);
-        }
-        outcomeDiv.append(h2)
-        //removes buttons after game has ended and creates a "start new game" button
-        buttonsDiv.remove();
-        resetButton.append(resetBtn)
-        resetBtn.innerText = 'Start New Game';
-        resetBtn.classList.add('re-button')
+        winnerMessage = "You won! Great job beating a computer!";
+        buttonText = "Start a New Game";
+    } else {
+        winnerMessage = "You're done bud... a computer beat ya!";
+        buttonText = "Try Again?";
     }
 
-    if (computerScore === 5) {
-        h2.classList.add('computer-won')
-        h2.innerText = `You're done bud...a computer beat ya!`
-        if (outcomeDiv.hasChildNodes()) {
-            outcomeDiv.removeChild(outcomeDiv.children[0]);
-        }
-        outcomeDiv.append(h2)
-        
-        buttonsDiv.remove();
-        resetButton.append(resetBtn)
-        resetBtn.innerText = 'Try Again?';
-        resetBtn.classList.add('re-button')
-    }
-}
+    displayOutcomeMessage(winnerMessage);
 
-const updateScores = (playerScore, computerScore) => {
-    playerScoreDiv.innerText = `${playerScore}`
-    computerScoreDiv.innerText = `${computerScore}`
-}
+    // Update the button text based on the game outcome
+    resetButton.innerText = buttonText;
+
+    // Toggle UI elements for game end state
+    buttonsDiv.style.display = 'none'; // Hide game buttons
+    resetButton.style.display = 'inline-block'; // Show reset button
+};
+
+
+const updateScores = () => {
+    playerScoreDiv.innerText = playerScore;
+    computerScoreDiv.innerText = compScore;
+};
 
 const updatePic = (playerSelection, computerSelection) => {
-    document.getElementById('playerChoicePic').src= `./images/${playerSelection}.svg`;
-    document.getElementById('compChoicePic').src= `./images/${computerSelection}.svg`;
-    compChoicePic.style.transform = 'rotateY(180deg)';
-}
+    document.getElementById('playerChoicePic').src = `./images/${playerSelection}.svg`;
+    document.getElementById('compChoicePic').src = `./images/${computerSelection}.svg`;
+};
 
 const handlePlayerChoice = (playerSelection) => {
-    const computerSelection = getComputerChoice()
-    playRound(playerSelection, computerSelection)
-    updateScores(playerScore, compScore)
-    updatePic(playerSelection, computerSelection)
-    checkForWinner(playerScore, compScore)
-}
+    const computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+    updatePic(playerSelection, computerSelection);
+    checkForWinner();
+};
 
+// Event listeners for player choices
 rockButton.addEventListener('click', () => handlePlayerChoice('rock'));
-
 paperButton.addEventListener('click', () => handlePlayerChoice('paper'));
-
 scissorsButton.addEventListener('click', () => handlePlayerChoice('scissors'));
 
+// Event listener for resetting the game
 resetButton.addEventListener('click', () => {
     playerScore = 0
     compScore = 0
-    updateScores(playerScore, compScore);
+    updateScores();
+    outcomeDiv.innerHTML = ''; // Clear any outcome messages
     
-    // Clear any outcome messages
-    if (outcomeDiv.hasChildNodes()) {
-        outcomeDiv.removeChild(outcomeDiv.children[0]);
-    }
-    
-    //removes start new game button and appends buttonsDiv back
-    if (resetButton.hasChildNodes()) {
-        resetButton.removeChild(resetButton.children[0]);
-    }
-    containerDiv.appendChild(buttonsDiv)
+    buttonsDiv.style.display = 'flex'; // Re-show game buttons
+    resetButton.style.display = 'none'; // Hide reset button
 
     // Resets choice images to default
     document.getElementById('playerChoicePic').src = './images/darkSquare.jpg';
