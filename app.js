@@ -8,7 +8,7 @@ const scissorsButton = document.querySelector('.scissors')
 const outcomeDiv = document.querySelector('.outcome')
 const playerScoreDiv = document.querySelector('.player-score')
 const computerScoreDiv = document.querySelector('.computer-score')
-const buttonsDiv = document.querySelector('.button')
+const buttonsDiv = document.querySelector('.buttons')
 const resetButton = document.querySelector('.reset-button')
 // const containerDiv = document.querySelector('.container')
 
