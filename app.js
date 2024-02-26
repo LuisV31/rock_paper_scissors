@@ -117,7 +117,7 @@ resetButton.addEventListener('click', () => {
     updateScores();
     outcomeDiv.innerHTML = ''; // Clear any outcome messages
     
-    buttonsDiv.style.display = 'flex'; // Re-show game buttons
+    buttonsDiv.style.display = 'block'; // Re-show game buttons
     resetButton.style.display = 'none'; // Hide reset button
 
     // Resets choice images to default

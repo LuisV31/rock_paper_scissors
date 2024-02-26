@@ -1,13 +1,19 @@
 body {
-    background-color: #a2b9bc;
+    background-image: url(/images/rm251-aum-01-a.jpg);
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    font-family: 'Open Sans', sans-serif; /* Example font */
 }
 .container {
     width: 550px;
     margin: auto;
     text-align: center;
-    background-color: #a2b9bc;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
 }
 .running-score {
+    padding: 10px 0px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -16,29 +22,29 @@ body {
     justify-content: space-between;
     margin: 20px;
 }
-.button {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-    padding: 20px;
-}
+
 .player-score, .computer-score {
-    border: 2px solid black;
+    border: 5px solid #ff00ff; /* Neon pink border */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    color: #ffffff; /* White text for readability */
     height: 30px;
     width: 40px;
     font-size: 25px;
     padding: 20px;
-    background-color: white;
 }
 button {
-    height:45px;
-    width:90px;
-    background-color: white;
+    height:60px;
+    width:160px;
+    background-color: #000; /* Dark background for the neon effect */
+    border: 2px solid #fff; /* White border */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 0 0 10px rgb(255, 0, 251), 0 0 20px rgb(255, 0, 212), 0 0 40px rgb(255, 0, 221); /* Cyan glow */
+    color: #ffffff;
     transition-duration:0.4s;
     font-size: 20px;
 }
 button:hover {
-    background-color: black;
+    background-color: #b544c9;
     color: white;
     cursor: pointer;
 }
@@ -47,9 +53,10 @@ button:active {
     transform: translateY(4px);
 }
 .reset-button {
+    background-color: #b544c9;
     display: none;
-    width:110px;
-    height:60px;
+    width:180px;
+    height:65px;
     transition-duration: 0.4s;
     font-size: 20px;
 }
@@ -60,6 +67,9 @@ button:active {
 img {
     height: 150px;
     width: 150px;
+}
+.vs {
+    margin-top: 25px;
 }
 .picChange{
     border: 1px solid black;
@@ -77,15 +87,26 @@ img {
 .name {
     font-size: 17px;
     font-weight: bold;
+    color: #a6079cd7;
+}
+@keyframes flicker {
+    0%, 100% { opacity: 1;}
+    50% { opacity: .5;}
 }
 .outcome {
     padding: 8px;
     margin: 10px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     height: 90px;
     width: 530px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fcc0ff;
+}
+.name, .outcome p {
+    color: #00ffff;
+    text-shadow: 0 0 5px #ff00ff;
+
 }
